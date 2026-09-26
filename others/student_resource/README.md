@@ -1,7 +1,6 @@
-# CV: Multi-Source Business Entity Resolution System
-### Amazon ML Challenge 2026
+# ML Challenge 2026 Problem Statement
 
-## Problem Statement
+## Business Entity Resolution Challenge
 
 In large-scale commercial platforms, business identity data arrives from multiple independent sources — each contributing partial, noisy fragments of information about the same real-world entities. These fragments share no common identifiers, and the challenge of determining which records refer to the same business is known as Entity Resolution (ER). Your challenge is to build an ML solution that, given business records from 3 independent data sources with noisy and inconsistent fields, determines which records across sources refer to the same real-world business entity.
 
@@ -262,4 +261,3 @@ Participants are **STRICTLY NOT ALLOWED** to use external databases, APIs, or se
 - Consider the precision-recall trade-off carefully — F_0.5 rewards precision more than recall
 - Do not neglect singletons — correctly predicting "no match" is worth a full 1.0 on that entity
 - Validate your own output format against the rules above before submitting
->>>>>>> 5112a06 (Initialize Amazon ML Challenge 2026 repository structure)

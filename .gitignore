@@ -1,0 +1,104 @@
+# =====================================================================
+# Amazon ML Challenge 2026 - .gitignore
+# =====================================================================
+
+# --- Large Datasets & Archives ---
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+Dataset.zip
+
+# Ignore large raw dataset files & directories
+dataset/
+student_resource/dataset/
+data/
+*.tsv
+*.csv
+
+# Exceptions if any sample files are needed in docs
+!docs/*.csv
+!docs/*.tsv
+
+# --- Submission Outputs & Predictions ---
+output/*.tsv
+output/*.csv
+!output/.gitkeep
+
+# --- Python & Environment Artifacts ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env
+ENV/
+env.bak/
+venv.bak/
+
+# --- Jupyter Notebook Checkpoints ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- OS & System Artifacts ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+__MACOSX/
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# --- Models & Heavy Checkpoints ---
+*.pkl
+*.pickle
+*.joblib
+*.bin
+*.model
+models/*.pkl
+models/*.joblib
+models/*.pt
+models/*.pth
+models/*.onnx
+!models/.gitkeep
+
+# --- Logs & Performance Traces ---
+logs/
+*.log
+.agent/
+.agents/

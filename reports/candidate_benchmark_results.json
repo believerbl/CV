@@ -1,0 +1,292 @@
+{
+  "generated_at_utc": "2026-09-26T20:45:03.961833+00:00",
+  "data_source": {
+    "mode": "TEST-FIXTURE / NORMALIZATION-DATASET",
+    "note": "Small benchmark-only fixture derived from the existing normalization/blocking test expectations. This benchmark is NOT representative of full training-data scale. Do not claim training recall."
+  },
+  "is_sample": true,
+  "dataset_counts": {
+    "s1": 8,
+    "s2": 7,
+    "s3": 3,
+    "s2_plus_s3": 10,
+    "total_tp": 8,
+    "s1_with_positives": 6
+  },
+  "total_possible_pairs": 80,
+  "normalization_time_sec": 0.011757700005546212,
+  "configurations": [
+    {
+      "name": "A",
+      "flags": {
+        "pass_b_enabled": false,
+        "pass_c_enabled": false,
+        "pass_d_enabled": false,
+        "pass_e_enabled": false
+      },
+      "blocker_time_sec": 0.00018810003530234098,
+      "recall": 0.5,
+      "retained_tp": 4,
+      "total_tp": 8,
+      "s1_with_positives": 6,
+      "s1_total": 8,
+      "s1_completely_missed": 4,
+      "s1_zero_candidates": 6,
+      "zero_retention_s1_ids": [
+        "S1-002",
+        "S1-003",
+        "S1-004",
+        "S1-005"
+      ],
+      "cardinality": {
+        "mean": 0.5,
+        "median": 0.0,
+        "p95": 2,
+        "max": 2,
+        "total_pairs": 4
+      },
+      "total_possible_pairs": 80,
+      "reduction_ratio": 0.95,
+      "reduction_factor": 20.0,
+      "new_pairs_vs_prev": 4,
+      "newly_recovered_tp_vs_prev": 4
+    },
+    {
+      "name": "A+B",
+      "flags": {
+        "pass_b_enabled": true,
+        "pass_c_enabled": false,
+        "pass_d_enabled": false,
+        "pass_e_enabled": false
+      },
+      "blocker_time_sec": 0.0008617000421509147,
+      "recall": 0.875,
+      "retained_tp": 7,
+      "total_tp": 8,
+      "s1_with_positives": 6,
+      "s1_total": 8,
+      "s1_completely_missed": 1,
+      "s1_zero_candidates": 2,
+      "zero_retention_s1_ids": [
+        "S1-003"
+      ],
+      "cardinality": {
+        "mean": 1.125,
+        "median": 1.0,
+        "p95": 2,
+        "max": 2,
+        "total_pairs": 9
+      },
+      "total_possible_pairs": 80,
+      "reduction_ratio": 0.8875,
+      "reduction_factor": 8.88888888888889,
+      "new_pairs_vs_prev": 5,
+      "newly_recovered_tp_vs_prev": 3
+    },
+    {
+      "name": "A+B+C",
+      "flags": {
+        "pass_b_enabled": true,
+        "pass_c_enabled": true,
+        "pass_d_enabled": false,
+        "pass_e_enabled": false
+      },
+      "blocker_time_sec": 0.0024773000041022897,
+      "recall": 1.0,
+      "retained_tp": 8,
+      "total_tp": 8,
+      "s1_with_positives": 6,
+      "s1_total": 8,
+      "s1_completely_missed": 0,
+      "s1_zero_candidates": 2,
+      "zero_retention_s1_ids": [],
+      "cardinality": {
+        "mean": 1.375,
+        "median": 1.5,
+        "p95": 3,
+        "max": 3,
+        "total_pairs": 11
+      },
+      "total_possible_pairs": 80,
+      "reduction_ratio": 0.8625,
+      "reduction_factor": 7.2727272727272725,
+      "new_pairs_vs_prev": 2,
+      "newly_recovered_tp_vs_prev": 1
+    },
+    {
+      "name": "A+B+C+D",
+      "flags": {
+        "pass_b_enabled": true,
+        "pass_c_enabled": true,
+        "pass_d_enabled": true,
+        "pass_e_enabled": false
+      },
+      "blocker_time_sec": 0.005076600005850196,
+      "recall": 1.0,
+      "retained_tp": 8,
+      "total_tp": 8,
+      "s1_with_positives": 6,
+      "s1_total": 8,
+      "s1_completely_missed": 0,
+      "s1_zero_candidates": 2,
+      "zero_retention_s1_ids": [],
+      "cardinality": {
+        "mean": 1.375,
+        "median": 1.5,
+        "p95": 3,
+        "max": 3,
+        "total_pairs": 11
+      },
+      "total_possible_pairs": 80,
+      "reduction_ratio": 0.8625,
+      "reduction_factor": 7.2727272727272725,
+      "new_pairs_vs_prev": 0,
+      "newly_recovered_tp_vs_prev": 0
+    },
+    {
+      "name": "A+B+C+D+E",
+      "flags": {
+        "pass_b_enabled": true,
+        "pass_c_enabled": true,
+        "pass_d_enabled": true,
+        "pass_e_enabled": true
+      },
+      "blocker_time_sec": 0.005806199973449111,
+      "recall": 1.0,
+      "retained_tp": 8,
+      "total_tp": 8,
+      "s1_with_positives": 6,
+      "s1_total": 8,
+      "s1_completely_missed": 0,
+      "s1_zero_candidates": 2,
+      "zero_retention_s1_ids": [],
+      "cardinality": {
+        "mean": 1.375,
+        "median": 1.5,
+        "p95": 3,
+        "max": 3,
+        "total_pairs": 11
+      },
+      "total_possible_pairs": 80,
+      "reduction_ratio": 0.8625,
+      "reduction_factor": 7.2727272727272725,
+      "new_pairs_vs_prev": 0,
+      "newly_recovered_tp_vs_prev": 0
+    }
+  ],
+  "k_sweep": {
+    "note": "Benchmark-only post-union truncation of the final A+B+C+D+E map (first K sorted IDs per S1). blocking.py has no global K; internal pass caps (pass_b/c/e_max_candidates) are unchanged.",
+    "ks": [
+      5,
+      10,
+      15,
+      20,
+      30,
+      50,
+      100
+    ],
+    "results": [
+      {
+        "k": 5,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 10,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 15,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 20,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 30,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 50,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      },
+      {
+        "k": 100,
+        "recall": 1.0,
+        "retained_tp": 8,
+        "cardinality": {
+          "mean": 1.375,
+          "median": 1.5,
+          "p95": 3,
+          "max": 3,
+          "total_pairs": 11
+        }
+      }
+    ]
+  },
+  "zero_retention_final": {
+    "count": 0,
+    "diagnostics": []
+  },
+  "determinism": {
+    "identical": true,
+    "final_equals_benchmark_map": true,
+    "double_run_time_sec": 0.009118500049225986
+  },
+  "runtime": {
+    "normalization_sec": 0.011757700005546212,
+    "total_benchmark_sec": 0.03881950001232326
+  },
+  "memory": {
+    "method": "tracemalloc.get_traced_memory (Python allocations only; not process RSS peak). Portable but approximate.",
+    "tracemalloc_current_peak_bytes": 88758
+  }
+}

@@ -404,15 +404,13 @@ def main():
     if not determinism["identical"]:
         raise SystemExit("FAIL: final A+B+C+D+E configuration is nondeterministic.")
 
-    # -- K sweep (benchmark-only post-union cap; NOT production behavior) ------
-    # blocking.py has no global K: passes use pass-specific caps
-    # (pass_b/c/e_max_candidates=200; Pass D has no cap, only DF +
-    # min_shared filtering). So truncation below is applied AFTER union,
-    # inside this benchmark only, keeping the first K lexicographically
-    # sorted IDs per S1 (deterministic budget cap, not ranked retrieval).
+    # -- K sweep (evaluating real blocking.py candidate pruning) ---------------
     k_sweep = []
     for k in K_SWEEP_DEFAULT:
-        capped = {sid: cands[:k] for sid, cands in full_map.items()}
+        cfg_k = dict(CONFIGS[-1][1], max_candidates_per_s1=k)
+        t_k0 = time.perf_counter()
+        capped = generate_candidates(s1_norm, s2_norm, s3_norm, cfg_k)
+        k_time = time.perf_counter() - t_k0
         rec = sum(1 for sid, tps in gt_map.items()
                   for cid in tps if cid in capped.get(sid, []))
         card = cardinality_stats(capped)
@@ -421,6 +419,7 @@ def main():
             "recall": (rec / total_tp) if total_tp else None,
             "retained_tp": rec,
             "cardinality": card,
+            "runtime_sec": round(k_time, 4),
         })
 
     # -- Zero-retention diagnostics for the final configuration -----------------

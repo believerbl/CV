@@ -1,0 +1,108 @@
+{
+  "experiment_id": "EXP-STEP4-001",
+  "timestamp_utc": "2026-09-27T14:50:40.697679+00:00",
+  "normalization_version": "norm-v1.2.0",
+  "blocker_passes": [
+    "Pass A (Exact Core)",
+    "Pass B (Rare Token)",
+    "Pass C (Address Token)",
+    "Pass D (Typo)",
+    "Pass E (Devanagari)"
+  ],
+  "max_candidates_per_s1_K": 30,
+  "feature_set": "30-dim (30 features: lexical, address, numeric, missingness, country, script)",
+  "model_architecture": "Fast Tree Baseline (HistGradientBoostingClassifier, random_state=42)",
+  "training_pairs_count": 10,
+  "validation_entities_count": 4,
+  "candidate_pool_recall": 1.0,
+  "threshold_sweep": [
+    {
+      "threshold": 0.1,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.2,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.3,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.4,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.5,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.6,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.7,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.8,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    },
+    {
+      "threshold": 0.9,
+      "macro_f05": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "singleton_accuracy": 1.0,
+      "micro_f05": 1.0
+    }
+  ],
+  "best_operating_point": {
+    "threshold": 0.1,
+    "macro_f05": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "singleton_accuracy": 1.0
+  },
+  "performance": {
+    "runtime_seconds_total": 1.6255,
+    "runtime_normalization": 0.0023,
+    "runtime_blocking": 0.002,
+    "runtime_train": 1.6148,
+    "runtime_predict": 0.0058,
+    "peak_memory_bytes": 779499,
+    "peak_memory_mb": 0.74
+  }
+}

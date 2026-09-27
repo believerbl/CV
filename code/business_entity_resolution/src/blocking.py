@@ -881,6 +881,85 @@ def _union_candidate_maps(*maps: Dict[str, List[str]]) -> Dict[str, List[str]]:
     return union
 
 
+def _prune_candidate_map(
+    candidate_map: Dict[str, List[str]],
+    pass_maps: List[Dict[str, List[str]]],
+    s1_norm: Sequence[Any],
+    s2_s3_norm: Sequence[Any],
+    max_k: Optional[int],
+) -> Dict[str, List[str]]:
+    """Prune candidate lists to at most `max_k` per S1 record using a fast, deterministic ranker.
+
+    If max_k is None or max_k <= 0, returns the candidate_map unchanged.
+    If len(candidates) <= max_k, retains all candidates.
+    If len(candidates) > max_k, ranks candidates deterministically by:
+      1. Pass agreement count (how many passes retrieved this candidate).
+      2. Fast token overlap between S1 name/address and candidate name/address.
+      3. Deterministic tie-breaking on candidate entity_id.
+    """
+    if max_k is None or max_k <= 0:
+        return candidate_map
+
+    # Check if any S1 list exceeds max_k
+    if not any(len(cands) > max_k for cands in candidate_map.values()):
+        return candidate_map
+
+    # Map candidate entity_id to its normalized record (cached index)
+    s2_s3_lookup = {rec.entity_id: rec for rec in s2_s3_norm}
+
+    # Precompute pass votes per S1 and candidate: Dict[s1_id, Dict[cand_id, int]]
+    pass_votes: Dict[str, Dict[str, int]] = {}
+    for p_map in pass_maps:
+        for s1_id, cands in p_map.items():
+            if len(candidate_map.get(s1_id, [])) <= max_k:
+                continue
+            v_dict = pass_votes.setdefault(s1_id, {})
+            for cid in cands:
+                v_dict[cid] = v_dict.get(cid, 0) + 1
+
+    pruned_map: Dict[str, List[str]] = {}
+    for s1_rec in s1_norm:
+        s1_id = s1_rec.entity_id
+        cands = candidate_map.get(s1_id, [])
+        if len(cands) <= max_k:
+            pruned_map[s1_id] = cands
+            continue
+
+        s1_name_toks = set(s1_rec.name_tokens or [])
+        s1_num_toks = set(s1_rec.numeric_tokens or [])
+        s1_votes = pass_votes.get(s1_id, {})
+
+        scored_cands = []
+        for cid in cands:
+            cand_rec = s2_s3_lookup.get(cid)
+            votes = s1_votes.get(cid, 1)
+
+            # Fast scoring components:
+            # - Multi-pass agreement: 10 points per vote
+            score = votes * 10
+
+            if cand_rec is not None:
+                # Name token overlap bonus (up to 5 points)
+                c_name_toks = set(cand_rec.name_tokens or [])
+                if s1_name_toks and c_name_toks:
+                    overlap = len(s1_name_toks & c_name_toks)
+                    score += min(5, overlap * 2)
+
+                # Numeric address anchor bonus (up to 4 points)
+                c_num_toks = set(cand_rec.numeric_tokens or [])
+                if s1_num_toks and c_num_toks and (s1_num_toks & c_num_toks):
+                    score += 4
+
+            scored_cands.append((score, cid))
+
+        # Sort deterministically: highest score first, then alphabetical on cid
+        scored_cands.sort(key=lambda item: (-item[0], item[1]))
+        top_cands = sorted([cid for _, cid in scored_cands[:max_k]])
+        pruned_map[s1_id] = top_cands
+
+    return pruned_map
+
+
 def generate_candidates(
     s1_records: Sequence[RawOrNormalized],
     s2_records: Sequence[RawOrNormalized],
@@ -890,7 +969,8 @@ def generate_candidates(
     """Top-level blocking entry point.
 
     Normalizes raw input (if needed) via Nidhi's normalize_dataframe_rows(),
-    then runs the implemented blocking passes (A + B + C + D + E, unioned).
+    then runs the implemented blocking passes (A + B + C + D + E, unioned),
+    and applies K-budget candidate pruning if configured.
 
     Guarantees:
       - Every S1 record has an entry in the returned dict (possibly []).
@@ -917,4 +997,16 @@ def generate_candidates(
         maps.append(_pass_e_script_aware(s1_norm, s2_norm, s3_norm, cfg))
     candidate_map = _union_candidate_maps(*maps)
 
+    # Apply K-budget pruning if configured
+    max_k = cfg.get("max_candidates_per_s1") or cfg.get("top_k") or cfg.get("k")
+    if max_k is not None:
+        candidate_map = _prune_candidate_map(
+            candidate_map=candidate_map,
+            pass_maps=maps,
+            s1_norm=s1_norm,
+            s2_s3_norm=s2_norm + s3_norm,
+            max_k=int(max_k),
+        )
+
     return candidate_map
+

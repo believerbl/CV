@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-26T20:45:03.961833+00:00",
+  "generated_at_utc": "2026-09-27T12:28:50.009804+00:00",
   "data_source": {
     "mode": "TEST-FIXTURE / NORMALIZATION-DATASET",
     "note": "Small benchmark-only fixture derived from the existing normalization/blocking test expectations. This benchmark is NOT representative of full training-data scale. Do not claim training recall."
@@ -14,7 +14,7 @@
     "s1_with_positives": 6
   },
   "total_possible_pairs": 80,
-  "normalization_time_sec": 0.011757700005546212,
+  "normalization_time_sec": 0.006860000001324806,
   "configurations": [
     {
       "name": "A",
@@ -24,7 +24,7 @@
         "pass_d_enabled": false,
         "pass_e_enabled": false
       },
-      "blocker_time_sec": 0.00018810003530234098,
+      "blocker_time_sec": 0.00015809999968041666,
       "recall": 0.5,
       "retained_tp": 4,
       "total_tp": 8,
@@ -59,7 +59,7 @@
         "pass_d_enabled": false,
         "pass_e_enabled": false
       },
-      "blocker_time_sec": 0.0008617000421509147,
+      "blocker_time_sec": 0.0011964999976044055,
       "recall": 0.875,
       "retained_tp": 7,
       "total_tp": 8,
@@ -91,7 +91,7 @@
         "pass_d_enabled": false,
         "pass_e_enabled": false
       },
-      "blocker_time_sec": 0.0024773000041022897,
+      "blocker_time_sec": 0.0008670999995956663,
       "recall": 1.0,
       "retained_tp": 8,
       "total_tp": 8,
@@ -121,7 +121,7 @@
         "pass_d_enabled": true,
         "pass_e_enabled": false
       },
-      "blocker_time_sec": 0.005076600005850196,
+      "blocker_time_sec": 0.0024395000000367872,
       "recall": 1.0,
       "retained_tp": 8,
       "total_tp": 8,
@@ -151,7 +151,7 @@
         "pass_d_enabled": true,
         "pass_e_enabled": true
       },
-      "blocker_time_sec": 0.005806199973449111,
+      "blocker_time_sec": 0.0036792000028071925,
       "recall": 1.0,
       "retained_tp": 8,
       "total_tp": 8,
@@ -196,7 +196,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0029
       },
       {
         "k": 10,
@@ -208,7 +209,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0029
       },
       {
         "k": 15,
@@ -220,7 +222,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0046
       },
       {
         "k": 20,
@@ -232,7 +235,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0032
       },
       {
         "k": 30,
@@ -244,7 +248,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0034
       },
       {
         "k": 50,
@@ -256,7 +261,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.0036
       },
       {
         "k": 100,
@@ -268,7 +274,8 @@
           "p95": 3,
           "max": 3,
           "total_pairs": 11
-        }
+        },
+        "runtime_sec": 0.003
       }
     ]
   },
@@ -279,14 +286,14 @@
   "determinism": {
     "identical": true,
     "final_equals_benchmark_map": true,
-    "double_run_time_sec": 0.009118500049225986
+    "double_run_time_sec": 0.006241299997782335
   },
   "runtime": {
-    "normalization_sec": 0.011757700005546212,
-    "total_benchmark_sec": 0.03881950001232326
+    "normalization_sec": 0.006860000001324806,
+    "total_benchmark_sec": 0.04731739999988349
   },
   "memory": {
     "method": "tracemalloc.get_traced_memory (Python allocations only; not process RSS peak). Portable but approximate.",
-    "tracemalloc_current_peak_bytes": 88758
+    "tracemalloc_current_peak_bytes": 105193
   }
 }

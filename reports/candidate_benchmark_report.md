@@ -3,7 +3,7 @@
 Dataset type: TEST-FIXTURE / NORMALIZATION-DATASET
 This benchmark is NOT representative of full training-data scale.
 
-- Generated (UTC): 2026-09-26T20:45:03.961833+00:00
+- Generated (UTC): 2026-09-27T12:28:50.009804+00:00
 - Data source: {"mode": "TEST-FIXTURE / NORMALIZATION-DATASET", "note": "Small benchmark-only fixture derived from the existing normalization/blocking test expectations. This benchmark is NOT representative of full training-data scale. Do not claim training recall."}
 - Dataset: S1=8, S2=7, S3=3, S2+S3=10, total positives=8, S1 with positives=6
 - Exhaustive pairs S1x(S2+S3): 80
@@ -11,7 +11,7 @@ This benchmark is NOT representative of full training-data scale.
 ## Benchmark methodology
 
 - Real `generate_candidates()` called per configuration; ground truth used only afterward for recall.
-- Records normalized once (0.0118s); blocker timing excludes renormalization.
+- Records normalized once (0.0069s); blocker timing excludes renormalization.
 - Recall is measured over the COMPLETE S1 population (unmatched S1s included in cardinality, excluded from recall numerator/denominator).
 - No global K exists in blocking.py (pass-specific caps only); the K sweep is a benchmark-only post-union truncation.
 
@@ -31,7 +31,7 @@ This benchmark is NOT representative of full training-data scale.
 - S1 with positives: 6; completely missed: 1; zero-candidate S1: 2
 - Cardinality: mean 1.125, median 1.0, P95 2, max 2, total 9
 - Reduction ratio: 0.887500; factor: 8.89
-- Blocker runtime: 0.0009s
+- Blocker runtime: 0.0012s
 
 ## A+B+C
 
@@ -40,7 +40,7 @@ This benchmark is NOT representative of full training-data scale.
 - S1 with positives: 6; completely missed: 0; zero-candidate S1: 2
 - Cardinality: mean 1.375, median 1.5, P95 3, max 3, total 11
 - Reduction ratio: 0.862500; factor: 7.27
-- Blocker runtime: 0.0025s
+- Blocker runtime: 0.0009s
 
 ## A+B+C+D
 
@@ -49,7 +49,7 @@ This benchmark is NOT representative of full training-data scale.
 - S1 with positives: 6; completely missed: 0; zero-candidate S1: 2
 - Cardinality: mean 1.375, median 1.5, P95 3, max 3, total 11
 - Reduction ratio: 0.862500; factor: 7.27
-- Blocker runtime: 0.0051s
+- Blocker runtime: 0.0024s
 
 ## A+B+C+D+E
 
@@ -58,7 +58,7 @@ This benchmark is NOT representative of full training-data scale.
 - S1 with positives: 6; completely missed: 0; zero-candidate S1: 2
 - Cardinality: mean 1.375, median 1.5, P95 3, max 3, total 11
 - Reduction ratio: 0.862500; factor: 7.27
-- Blocker runtime: 0.0058s
+- Blocker runtime: 0.0037s
 
 ## Incremental pass contribution
 
@@ -92,9 +92,9 @@ See per-configuration cardinality above; totals are bounded by pass-specific DF 
 
 ## Runtime/memory
 
-- Normalization: 0.0118s; total benchmark: 0.0388s
+- Normalization: 0.0069s; total benchmark: 0.0473s
 - Memory method: tracemalloc.get_traced_memory (Python allocations only; not process RSS peak). Portable but approximate.
-- tracemalloc current peak: 88758 bytes
+- tracemalloc current peak: 105193 bytes
 - Determinism double-run identical: True
 
 ## Observations (measured only)

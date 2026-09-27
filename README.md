@@ -262,4 +262,4 @@ Participants are **STRICTLY NOT ALLOWED** to use external databases, APIs, or se
 - Consider the precision-recall trade-off carefully — F_0.5 rewards precision more than recall
 - Do not neglect singletons — correctly predicting "no match" is worth a full 1.0 on that entity
 - Validate your own output format against the rules above before submitting
->>>>>>> 5112a06 (Initialize Amazon ML Challenge 2026 repository structure)
+

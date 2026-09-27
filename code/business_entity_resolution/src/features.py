@@ -77,15 +77,23 @@ def _levenshtein_distance(s1: str, s2: str) -> int:
     return prev[len(s2)]
 
 
-def _edit_similarity(s1: Optional[str], s2: Optional[str]) -> float:
+def _edit_similarity(s1: Optional[str], s2: Optional[str], max_len_cap: int = 48) -> float:
     """Normalized edit similarity in [0.0, 1.0]."""
     if not s1 or not s2:
         return 0.0
-    s1_str = str(s1)
-    s2_str = str(s2)
-    max_len = max(len(s1_str), len(s2_str))
+    if s1 == s2:
+        return 1.0
+    s1_str = str(s1)[:max_len_cap]
+    s2_str = str(s2)[:max_len_cap]
+    if s1_str == s2_str:
+        return 1.0
+    l1 = len(s1_str)
+    l2 = len(s2_str)
+    max_len = max(l1, l2)
     if max_len == 0:
         return 1.0
+    if abs(l1 - l2) / max_len >= 0.7:
+        return 0.0
     dist = _levenshtein_distance(s1_str, s2_str)
     return max(0.0, 1.0 - (dist / max_len))
 

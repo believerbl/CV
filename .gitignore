@@ -25,6 +25,7 @@ data/
 # --- Submission Outputs & Predictions ---
 output/*.tsv
 output/*.csv
+output/*.db
 !output/.gitkeep
 
 # --- Python & Environment Artifacts ---
